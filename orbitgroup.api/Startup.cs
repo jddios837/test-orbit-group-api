@@ -27,6 +27,7 @@ namespace orbitgroup.api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddControllers();
             var connectionString = "Data Source=sample.db";
             services.AddDbContext<StudentDbContext>(options => options.UseSqlite(connectionString));
@@ -40,6 +41,9 @@ namespace orbitgroup.api
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(
+                options => options.WithOrigins("http://localhost:4201").AllowAnyMethod()
+            );
             app.UseHttpsRedirection();
 
             app.UseRouting();
