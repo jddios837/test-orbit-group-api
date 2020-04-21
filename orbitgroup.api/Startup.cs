@@ -42,7 +42,10 @@ namespace orbitgroup.api
             }
 
             app.UseCors(
-                options => options.WithOrigins("http://localhost:4201").AllowAnyMethod()
+                options => options.WithOrigins("http://localhost:4201")
+                                                .AllowAnyOrigin()
+                                                .AllowAnyMethod()
+                                                .AllowAnyHeader()
             );
             app.UseHttpsRedirection();
 

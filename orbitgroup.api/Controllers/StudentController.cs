@@ -30,7 +30,7 @@ namespace orbitgroup.api.Controllers
         [HttpPost]
         public ActionResult<IEnumerable<Student>> Post([FromBody] Student student)
         {
-            if(StudentUserNameExists(student.Username))
+            if(StudentUserNameExists(student.UserName))
             {
                 return BadRequest();
             }
@@ -51,7 +51,7 @@ namespace orbitgroup.api.Controllers
                 return Ok();
             }
 
-            return NoContent();
+            return NotFound();
         }
 
         // GET A STUDENT BY ID
@@ -69,12 +69,13 @@ namespace orbitgroup.api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, Student student)
+        public async Task<IActionResult> Put(int id, [FromBody] Student student)
         {
             if (id != student.Id)
             {
                 return BadRequest();
             }
+
 
             dbContext.Entry(student).State = EntityState.Modified;
 
@@ -117,6 +118,6 @@ namespace orbitgroup.api.Controllers
          dbContext.Students.Any(e => e.Id == id);
 
         private bool StudentUserNameExists(string username) =>
-         dbContext.Students.Any(e => e.Username == username);
+         dbContext.Students.Any(e => e.UserName == username);
     }
 }

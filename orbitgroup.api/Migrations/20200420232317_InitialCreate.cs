@@ -12,11 +12,11 @@ namespace orbitgroup.api.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Username = table.Column<string>(nullable: true),
+                    UserName = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     Age = table.Column<int>(nullable: false),
-                    Career = table.Column<int>(nullable: false)
+                    Career = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
